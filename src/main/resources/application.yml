@@ -1,0 +1,51 @@
+server:
+  port: 9000
+spring:
+  h2:
+    console:
+      path: /h2-console
+      enabled: true
+      settings:
+        web-allow-others: true
+  sql:
+    init:
+      encoding: UTF-8
+  data:
+    redis:
+      host: 192.168.0.5
+      port: 6379
+      password: redis
+  datasource:
+    driver-class-name: org.h2.Driver
+    url: jdbc:h2:mem:testdb
+    username: sa
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: create
+    properties:
+      hibernate:
+        format_sql: true
+        use_sql_comments: true
+    defer-datasource-initialization: true
+    generate-ddl: true
+
+logging:
+  level:
+    org:
+      hibernate:
+        sql: debug
+        type:
+          descriptor:
+            sql: trace
+
+producers:
+  bootstrap-server: 192.168.0.5:9092
+  topic1:
+    name: msatest
+  topic2:
+    name: noti
+
+consumer:
+  topic1:
+    name: msatest
